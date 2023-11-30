@@ -1,0 +1,150 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.powered-by {
+  margin-top: 20px;
+  color: #888;
+}
+
+span {
+  color: #f88;
+}
+
+.sponsors {
+  background-color: #F6F4EB;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.sponsors img {
+  margin: 0 15px;
+  width: 60px; /* Adjust based on your logo sizes */
+  vertical-align: middle;
+}
+
+.sponsor-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* To center the logos */
+  align-items: center; /* Vertically aligns the items in the middle */
+}
+
+.sponsor-logos > div {
+  margin: 0 15px; /* Adjust as needed */
+}
+
+.sponsor-logo-container {
+  display: inline-block;
+  padding: 10px;  /* Add some space around each logo */
+}
+
+.sponsor-logo {
+  width: 150px;   /* Adjust width as desired */
+  height: auto;   /* Maintain aspect ratio */
+}
+
+.gifts-img {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* To center the logos */
+  align-items: center; /* Vertically aligns the items in the middle */
+}
+
+.gifts {
+  background-color: #F6F4EB;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.gift {
+  display: flex;
+  margin: 0 15px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gift img {
+  width: 80px; /* Adjust based on your image sizes */
+  margin-bottom: 10px;
+}
+
+.shipping-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* To center the logos */
+  align-items: center; /* Vertically aligns the items in the middle */
+  /* text-align: center; */
+  padding: 20px;
+  background-color: #F6F4EB;
+  margin: 20px 0;
+}
+
+
+footer {
+  background-color: #F6F4EB;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #144272;
+  color: #F6F4EB;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+}
