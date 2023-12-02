@@ -1,26 +1,15 @@
-import React, { createContext, useContext, useState } from 'react';
+import { Auth } from 'aws-amplify';
 
-// Create a context for the auth state
-const AuthContext = createContext(null);
-
-export const useAuth = () => useContext(AuthContext);
-
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  const signIn = (newUser, cb) => {
-    // ... sign-in logic
-    setUser(newUser);
-    cb(); // callback function after signing in
+export function useAuth() {
+  const signIn = async (username, password) => {
+    return await Auth.signIn(username, password);
   };
 
-  const signOut = (cb) => {
-    // ... sign-out logic
-    setUser(null);
-    cb(); // callback function after signing out
+  const signOut = async () => {
+    return await Auth.signOut();
   };
 
-  const value = { user, signIn, signOut };
+  // other functionalities like signUp, confirmSignUp, etc.
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+  return { signIn, signOut /* , other exposed functions */ };
+}
