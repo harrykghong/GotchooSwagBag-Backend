@@ -1,6 +1,9 @@
+import React, { createContext, useContext } from 'react';
 import { Auth } from 'aws-amplify';
 
-export function useAuth() {
+const AuthContext = createContext(null);
+
+export const AuthProvider = ({ children }) => {
   const signIn = async (username, password) => {
     return await Auth.signIn(username, password);
   };
@@ -11,5 +14,11 @@ export function useAuth() {
 
   // other functionalities like signUp, confirmSignUp, etc.
 
-  return { signIn, signOut /* , other exposed functions */ };
-}
+  return (
+    <AuthContext.Provider value={{ signIn, signOut /* , other exposed functions */ }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);
