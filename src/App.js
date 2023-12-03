@@ -9,10 +9,7 @@ import Sponsors from './sponsorBanner';
 import PhysicalGifts from './physicalGifts';
 import DigitalGifts from './digitalGifts';
 import { AuthProvider } from './authContext';
-import { Amplify } from 'aws-amplify';
-import awsExports from './aws-exports'; // your Cognito configuration file
 
-Amplify.configure(awsExports);
 
 
 const defaultTheme = createTheme();
