@@ -20,29 +20,29 @@ const App = () => {
   const [sponsors, setSponsors] = useState([]);
   const [physicalG, setGifts] = useState([]);
   const [digitalG, setdigitalGifts] = useState([]); //fetch digital gift here, change line 59 as well
-  
+
   useEffect(() => {
     const fetchSponsors = async () => {
-      const response = await fetch('http://gcdm2.crhcg4x4v37c.us-west-1.rds.amazonaws.com:3306/sponsors');
+      const response = await fetch('http://localhost:5001/sponsors');
       const data = await response.json();
       setSponsors(data);
     };
     const fetchGifts = async () => {
-      const response = await fetch('http://gcdm2.crhcg4x4v37c.us-west-1.rds.amazonaws.com:3306/physicalgifts');
+      const response = await fetch('http://localhost:5001/physicalgifts');
       const data = await response.json();
       setGifts(data);
     };
 
     const fetchdigitalGifts = async () => {
-      const response = await fetch('http://gcdm2.crhcg4x4v37c.us-west-1.rds.amazonaws.com:3306/digitalgifts');
+      const response = await fetch('http://localhost:5001/digitalgifts');
       const data = await response.json();
       setdigitalGifts(data);
     };
     const fetchConferences = async () => {
-      const response = await fetch('http://gcdm2.crhcg4x4v37c.us-west-1.rds.amazonaws.com:3306/host');
+      const response = await fetch('http://localhost:5001/host');
       const data = await response.json();
       setConferences(data[0]);
-    }; 
+    };
 
     fetchConferences();
     fetchSponsors();
@@ -60,17 +60,17 @@ const App = () => {
           }
         `}
       </style>
-      <Container maxWidth = "xl" >
-        <MainConferenceBanner conference={conference}/>
+      <Container maxWidth="xl" >
+        <MainConferenceBanner conference={conference} />
         {/* <Header conference={conference}/> */}
         <Sponsors sponsors={sponsors} />
         <AuthProvider>
           <PhysicalGifts gifts={physicalG} />
-          <DigitalGifts gifts={digitalG}/>
+          <DigitalGifts gifts={digitalG} />
         </AuthProvider>
-        
+
         {/*<ShippingInfo />*/}
-        
+
       </Container>
     </ThemeProvider>
   );
