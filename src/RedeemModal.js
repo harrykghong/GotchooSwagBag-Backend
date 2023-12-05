@@ -7,6 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import Link from '@mui/material/Link';
 import ShippingInfoModal from './ShippingInfoModal';
 import SignInModal from './SignInModal';
 import SignUpModal from './SignUpModal';
@@ -75,10 +76,10 @@ export default function Redeem({ buttonName }) {
                         </Stepper> */}
                         {activeStep === steps.length ? (
                             <React.Fragment>
-                            <Typography variant="h5" gutterBottom>
+                            <Typography variant="h5" gutterBottom sx={{ mt: 3, mb: 2, ml:3}}>
                                 Thank you for your order.
                             </Typography>
-                            <Typography variant="subtitle1">
+                            <Typography variant="subtitle1" sx={{ mb: 2, ml:3}}>
                                 Your order number is #2001539. We have emailed your order
                                 confirmation, and will send you an update when your order has
                                 shipped.
@@ -89,7 +90,47 @@ export default function Redeem({ buttonName }) {
                             <Grid item xs={12}>
                                 {getStepContent(activeStep)}
                             </Grid>
-                            <Grid item xs={12}>
+                            {activeStep == 0 && (
+                                    <Grid container sx={{ ml: 2 }}>
+                                        <Grid item xs >
+                                            <Link href="#" variant="body2">
+                                            Forgot password?
+                                            </Link>
+                                        </Grid>
+                                        <Grid item>
+                                            <Link href="#" variant="body2" onClick={handleNext}>
+                                            {"Don't have an account? Sign Up"}
+                                            </Link>
+                                        </Grid>
+                                    </Grid>
+                            )}
+
+                            {activeStep == 1 && (
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    onClick={handleNext}
+                                    sx={{ mt: 3, mb: 2, ml:3}}
+                                >
+                                    Sign Up
+                                </Button>
+                            )}
+
+                            {activeStep == 2 && (
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    onClick={handleNext}
+                                    sx={{ mt: 3, mb: 2, ml:3}}
+                                >
+                                    Place Order
+                                </Button>
+                            )}
+                            
+                            
+                            {/*<Grid item xs={12}>
                                 <Box
                                 sx={{
                                     display: 'flex',
@@ -111,14 +152,14 @@ export default function Redeem({ buttonName }) {
                                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                                 </Button>
                                 </Box>
-                            </Grid>
+                                </Grid>*/}
                             
                             </React.Fragment>
                         )}
                 
                     </Grid>
                     </DialogContent>
-                    <DialogActions>
+{/*                    <DialogActions>
                         <Box
                         sx={{
                             display: 'flex',
@@ -133,7 +174,7 @@ export default function Redeem({ buttonName }) {
                             Save
                         </Button>
                         </Box>
-                    </DialogActions>
+                    </DialogActions>*/}
                 </Dialog>
             </Grid>
         </Grid>
