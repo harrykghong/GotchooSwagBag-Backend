@@ -21,9 +21,6 @@ function SignUpModal() {
     return (
       <Grid>
         <Grid container spacing={2}>
-            <Grid item xs={12}>
-            <h4>Sign up</h4>
-            </Grid>
             <Grid item xs={12} sm={6}>
             <TextField
                 autoComplete="given-name"
@@ -73,6 +70,14 @@ function SignUpModal() {
             />
             </Grid>
         </Grid>
+        <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+        >
+            Sign Up
+        </Button>
         <Grid container justifyContent="flex-end">
             <Grid item>
             <Link href="#" variant="body2">

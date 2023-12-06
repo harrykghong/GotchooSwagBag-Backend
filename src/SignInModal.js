@@ -19,7 +19,6 @@ function SignInModal() {
       };
     return (
       <Grid>
-        <h4>You have to sign in to Reedeem a physical gift</h4>
         <TextField
           margin="normal"
           required
@@ -52,6 +51,18 @@ function SignInModal() {
         >
           Sign In
         </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link href="#" variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
       </Grid>
     );
   };
