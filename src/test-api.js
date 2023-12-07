@@ -17,7 +17,7 @@ import { API, Auth } from "aws-amplify";
 const testapi = async () => {
     const apiName = "gotchooSwagBagAPI";
     const mainPath = "/swagbag" 
-    const subPath = '/sponsors';
+    const subPath = '/host';
     const path = mainPath + subPath;
   try {
     const result = await API.get(apiName, path, {});

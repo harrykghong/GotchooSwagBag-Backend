@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
+import { TestApp } from './test-api';
 Amplify.configure(awsconfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <TestApp />
   </React.StrictMode>
 );
 
