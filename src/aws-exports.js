@@ -3,6 +3,13 @@
 
 const awsmobile = {
     "aws_project_region": "us-west-1",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "gotchooSwagBagAPI",
+            "endpoint": "https://qs7iy2ivha.execute-api.us-west-1.amazonaws.com/cognito",
+            "region": "us-west-1"
+        }
+    ],
     "aws_cognito_identity_pool_id": "us-west-1:63eb542d-72cc-4f39-bad4-36f453115d42",
     "aws_cognito_region": "us-west-1",
     "aws_user_pools_id": "us-west-1_cKAQf7jW9",
@@ -26,13 +33,6 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
-    ],
-    "aws_cloud_logic_custom": [
-        {
-            "name": "gotchooSwagBagAPI",
-            "endpoint": "https://xy3hmx6bga.execute-api.us-west-1.amazonaws.com/cognito",
-            "region": "us-west-1"
-        }
     ]
 };
 
