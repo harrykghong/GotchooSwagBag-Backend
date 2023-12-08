@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,39 +8,42 @@ import Sponsors from './sponsorBanner';
 import PhysicalGifts from './physicalGifts';
 import DigitalGifts from './digitalGifts';
 import { AuthProvider } from './authContext';
-
-
+import { API } from "aws-amplify";
 
 const defaultTheme = createTheme();
-
 
 const App = () => {
   const [conference, setConferences] = useState([]);
   const [sponsors, setSponsors] = useState([]);
   const [physicalG, setGifts] = useState([]);
-  const [digitalG, setdigitalGifts] = useState([]); //fetch digital gift here, change line 59 as well
+  const [digitalG, setdigitalGifts] = useState([]);
 
   useEffect(() => {
+    const fetchData = async (path) => {
+      try {
+        const apiName = "gotchooSwagBagAPI";
+        const result = await API.get(apiName, path, {});
+        return result;
+      } catch (error) {
+        console.error("Error fetching data from API", error);
+      }
+    };
+
+    const fetchConferences = async () => {
+      const data = await fetchData("/swagbag/host");
+      setConferences(data[0]);
+    };
     const fetchSponsors = async () => {
-      const response = await fetch('http://localhost:5001/sponsors');
-      const data = await response.json();
+      const data = await fetchData("/swagbag/sponsors");
       setSponsors(data);
     };
     const fetchGifts = async () => {
-      const response = await fetch('http://localhost:5001/physicalgifts');
-      const data = await response.json();
+      const data = await fetchData("/swagbag/physicalgifts");
       setGifts(data);
     };
-
     const fetchdigitalGifts = async () => {
-      const response = await fetch('http://localhost:5001/digitalgifts');
-      const data = await response.json();
+      const data = await fetchData("/swagbag/digitalgifts");
       setdigitalGifts(data);
-    };
-    const fetchConferences = async () => {
-      const response = await fetch('http://localhost:5001/host');
-      const data = await response.json();
-      setConferences(data[0]);
     };
 
     fetchConferences();
