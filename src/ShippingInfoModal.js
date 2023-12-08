@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import { useAuth } from './authContext';
 
 
 
 function ShippingInfoModal({onPlaceOrderSuccess}) {
-  const { user, signIn, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [shippingInfo, setShippingInfo] = useState({ first_name: '', last_name:'', 
     address1: '', address2:'', city:'', state:'', zip:'', country:'' });
@@ -22,29 +16,29 @@ function ShippingInfoModal({onPlaceOrderSuccess}) {
     setShippingInfo({ ...shippingInfo, [name]: value });
   };
 
-  const handleSubmit = () => {
-    fetch('http://localhost:5001/shipping-info', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(shippingInfo)
+  // const handleSubmit = () => {
+  //   fetch('http://localhost:5001/shipping-info', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(shippingInfo)
       
-    })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Network response was not ok.');
-    })
-    .then(data => {
-      console.log('Success:', data);
-      setOpen(false);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  };
+  //   })
+  //   .then(response => {
+  //     if (response.ok) {
+  //       return response.json();
+  //     }
+  //     throw new Error('Network response was not ok.');
+  //   })
+  //   .then(data => {
+  //     console.log('Success:', data);
+  //     setOpen(false);
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error:', error);
+  //   });
+  // };
 
   const handlePlaceOrder = () => {
     onPlaceOrderSuccess();

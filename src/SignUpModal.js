@@ -6,7 +6,6 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Auth } from 'aws-amplify';
-import { useAuth } from './authContext'; 
 
 function SignUpModal({ onSignUpSuccess, onSignInClick }) {
     const [password, setPassword] = useState('');
@@ -16,7 +15,6 @@ function SignUpModal({ onSignUpSuccess, onSignInClick }) {
     const [userConfirmed, setUserConfirmed] = useState(false);
     const [confirmationCode, setConfirmationCode] = useState('');
     const [hasSignedUp, setHasSignedUp] = useState(false);
-    const { user, signIn, signOut, goToNextStep } = useAuth();
 
     const handlePasswordChange = (event) => {
         const newPassword = event.target.value;

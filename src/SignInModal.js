@@ -7,27 +7,14 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Auth } from 'aws-amplify';
-import { useAuth } from './authContext';
 
 
 
 function SignInModal({onSignInSuccess, onSignUpClick}) {
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  // const [hasSignedIn, setHasSignedIn] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
-  const { user, signIn, signOut, goToNextStep } = useAuth();
-
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -48,12 +35,14 @@ function SignInModal({onSignInSuccess, onSignUpClick}) {
       // Handle successful sign-in, e.g., redirect to a secured page
     } catch (error) {
       console.error('Error signing in:', error);
-      if (error.code === 'UserNotConfirmedException') {
+      if (error.name === 'UserNotConfirmedException') {
         setEmailError('Email not confirmed. Please check your email for a confirmation code.');
-      } else if (error.code === 'NotAuthorizedException') {
+      } else if (error.name === 'NotAuthorizedException') {
         setPasswordError('Incorrect email or password. Please try again.');
+        setEmailError('Incorrect email or password. Please try again.');
       } else {
         setEmailError('Failed to sign in. Please try again.');
+        setPasswordError('Failed to sign in. Please try again.');
       }
     }
   };
@@ -78,6 +67,8 @@ function SignInModal({onSignInSuccess, onSignUpClick}) {
           autoComplete="email"
           autoFocus
           onChange={handleEmailChange}
+          error={emailError.length > 0}
+          helperText={emailError}
         />
         <TextField
           margin="normal"
@@ -89,6 +80,8 @@ function SignInModal({onSignInSuccess, onSignUpClick}) {
           id="password"
           autoComplete="current-password"
           onChange={handlePasswordChange}
+          error={passwordError.length > 0}
+          helperText={passwordError}
         />
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
