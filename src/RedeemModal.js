@@ -26,21 +26,39 @@ export default function Redeem({ buttonName }) {
         handleNext();
     };
 
+    const onSignInSuccess = () => {
+        handleNext(2);
+    };
+
+    const onSignUpClick = () => {
+        handleNext();
+    }
+
+    const onSignInClick = () => {
+        handleNext(-1);
+    }
+
+    const onPlaceOrderSuccess = () => {
+        handleNext();
+    }
+
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <SignInModal />;
+                return <SignInModal onSignInSuccess={onSignInSuccess} onSignUpClick={onSignUpClick} />;
+                // return <SignInModal />;
+
             case 1:
-                return <SignUpModal onSignUpSuccess={onSignUpSuccess} />;
+                return <SignUpModal onSignUpSuccess={onSignUpSuccess} onSignInClick={onSignInClick} />;
             case 2:
-                return <ShippingInfoModal />;
+                return <ShippingInfoModal onPlaceOrderSuccess={onPlaceOrderSuccess}/>;
             default:
                 throw new Error('Unknown Step');
         }
     }
 
-    const handleNext = ()=> {
-        setActiveStep(activeStep + 1);
+    const handleNext = (steps = 1)=> {
+        setActiveStep(activeStep + steps);
     };
 
     const handleBack = () => {
@@ -67,9 +85,9 @@ export default function Redeem({ buttonName }) {
             </Button>
             <Grid container className="RedeemModalDialog">
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle variant="h6" gutterBottom>Redeem</DialogTitle>
+                    {/* <DialogTitle variant="h6" gutterBottom>Redeem</DialogTitle> */}
                     <DialogContent>
-                    <Grid container spacing={3}>
+                    <Grid>
                         {/* <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                             {steps.map((label) => (
                             <Step key={label}>
@@ -103,7 +121,7 @@ export default function Redeem({ buttonName }) {
                                     mr: 1, // Add right margin for the "Cancel" and "Save" buttons
                                 }}
                                 >
-                                {activeStep !== 0 && (
+                                {/* {activeStep !== 0 && (
                                     <Button onClick={handleBack}>
                                     Back
                                     </Button>
@@ -113,7 +131,7 @@ export default function Redeem({ buttonName }) {
                                     onClick={handleNext}
                                 >
                                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                                </Button>
+                                </Button> */}
                                 </Box>
                             </Grid>
                             
@@ -133,9 +151,9 @@ export default function Redeem({ buttonName }) {
                         <Button onClick={handleClose} color="primary">
                             Cancel
                         </Button>
-                        <Button onClick={handleSubmit} color="primary">
+                        {/* <Button onClick={handleSubmit} color="primary">
                             Save
-                        </Button>
+                        </Button> */}
                         </Box>
                     </DialogActions>
                 </Dialog>

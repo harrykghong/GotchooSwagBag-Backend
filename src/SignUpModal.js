@@ -4,10 +4,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { Auth } from 'aws-amplify';
 import { useAuth } from './authContext'; 
 
-function SignUpModal({ onSignUpSuccess }) {
+function SignUpModal({ onSignUpSuccess, onSignInClick }) {
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -93,69 +94,69 @@ function SignUpModal({ onSignUpSuccess }) {
         }
     };
     
-    
+    const handleSignInLinkClick = () => {
+        onSignInClick();
+      };
 
     return (
         <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+            <Grid>
+                <Typography variant="h5" align="left" gutterBottom>
+                    Sign Up
+                </Typography>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            autoComplete="given-name"
+                            name="firstName"
+                            required
+                            fullWidth
+                            id="firstName"
+                            label="First Name"
+                            autoFocus
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            fullWidth
+                            id="lastName"
+                            label="Last Name"
+                            name="lastName"
+                            autoComplete="family-name"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
                     <TextField
-                        autoComplete="given-name"
-                        name="firstName"
-                        required
-                        fullWidth
-                        id="firstName"
-                        label="First Name"
-                        autoFocus
-                    />
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            onChange={(e) => setEmailError('')} // Clear error when the user starts typing
+                            error={emailError.length > 0}
+                            helperText={emailError}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="new-password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            error={passwordError.length > 0}
+                            helperText={passwordError}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="lastName"
-                        label="Last Name"
-                        name="lastName"
-                        autoComplete="family-name"
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                <TextField
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        onChange={(e) => setEmailError('')} // Clear error when the user starts typing
-                        error={emailError.length > 0}
-                        helperText={emailError}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="new-password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        error={passwordError.length > 0}
-                        helperText={passwordError}
-                    />
-                </Grid>
+                
             </Grid>
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-            >
-                Sign Up
-            </Button>
             {hasSignedUp && !userConfirmed && (
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -182,9 +183,20 @@ function SignUpModal({ onSignUpSuccess }) {
                     </Grid>
                 </Grid>
             )}
+            { !hasSignedUp && (
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Sign Up
+                </Button>
+            )}
+            
             <Grid container justifyContent="flex-end">
                 <Grid item>
-                    <Link href="#" variant="body2">
+                    <Link href="#" variant="body2" onClick={handleSignInLinkClick}>
                         Already have an account? Sign in
                     </Link>
                 </Grid>
