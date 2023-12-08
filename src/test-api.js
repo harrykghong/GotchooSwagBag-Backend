@@ -15,10 +15,10 @@ import { API, Auth } from "aws-amplify";
 // }
 
 const testapi = async () => {
-    const apiName = "gotchooSwagBagAPI";
-    const mainPath = "/swagbag" 
-    const subPath = '/host';
-    const path = mainPath + subPath;
+  const apiName = "gotchooSwagBagAPI";
+  const mainPath = "/swagbag"
+  const subPath = '/host';
+  const path = mainPath + subPath;
   try {
     const result = await API.get(apiName, path, {});
     console.log(result);
@@ -28,9 +28,9 @@ const testapi = async () => {
 }
 
 export const TestApp = () => {
-    return (
-        <div>
-        <button onClick={testapi}>Test API</button>
-        </div>
-    );
+  return (
+    <div>
+      <button onClick={testapi}>Test API</button>
+    </div>
+  );
 }

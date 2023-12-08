@@ -8,9 +8,23 @@ import Sponsors from './sponsorBanner';
 import PhysicalGifts from './physicalGifts';
 import DigitalGifts from './digitalGifts';
 import { AuthProvider } from './authContext';
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
+
+
 
 const defaultTheme = createTheme();
+const testapi = async () => {
+  const apiName = "gotchooSwagBagAPI";
+  const mainPath = "/swagbag"
+  const subPath = '/host';
+  const path = mainPath + subPath;
+  try {
+    const result = await API.get(apiName, path, {});
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const App = () => {
   const [conference, setConferences] = useState([]);
@@ -29,10 +43,6 @@ const App = () => {
       }
     };
 
-    const fetchConferences = async () => {
-      const data = await fetchData("/swagbag/host");
-      setConferences(data[0]);
-    };
     const fetchSponsors = async () => {
       const data = await fetchData("/swagbag/sponsors");
       setSponsors(data);
@@ -44,6 +54,19 @@ const App = () => {
     const fetchdigitalGifts = async () => {
       const data = await fetchData("/swagbag/digitalgifts");
       setdigitalGifts(data);
+    };
+    const fetchConferences = async () => {
+      // const response = await fetch('http://localhost:5001/host');
+      // const data = await response.json();
+      // setConferences(data[0]);
+
+      const apiName = "gotchooSwagBagAPI";
+      const mainPath = "/swagbag"
+      const subPath = '/host';
+      const path = mainPath + subPath;
+      const result = await API.get(apiName, path, {});
+      console.log(result);
+      setConferences(result);
     };
 
     fetchConferences();
