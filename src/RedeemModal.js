@@ -14,26 +14,30 @@ import { useAuth } from './authContext';
 
 
 
-
 const steps = ['Sign in', 'Sign up', 'Shipping Information'];
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <SignInModal/>;
-        case 1:
-            return <SignUpModal/>;
-        case 2:
-            return <ShippingInfoModal/>;
-        default:
-            throw new Error('Unknown Step');
-    }
-}
 
 export default function Redeem({ buttonName }) {
     const [open, setOpen] = React.useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
-    const {user, signIn, signOut } = useAuth();
+    const { user, signIn, signOut, goToNextStep } = useAuth();
+
+    const onSignUpSuccess = () => {
+        handleNext();
+    };
+
+    function getStepContent(step) {
+        switch (step) {
+            case 0:
+                return <SignInModal />;
+            case 1:
+                return <SignUpModal onSignUpSuccess={onSignUpSuccess} />;
+            case 2:
+                return <ShippingInfoModal />;
+            default:
+                throw new Error('Unknown Step');
+        }
+    }
 
     const handleNext = ()=> {
         setActiveStep(activeStep + 1);

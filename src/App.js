@@ -53,28 +53,28 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      <style>
-        {`
-          body {
-            background-color: #0A2647;
-          }
-        `}
-      </style>
-      <Container maxWidth="xl" >
-        <MainConferenceBanner conference={conference} />
-        {/* <Header conference={conference}/> */}
-        <Sponsors sponsors={sponsors} />
-        <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider theme={defaultTheme}>
+        <CssBaseline />
+        <style>
+          {`
+            body {
+              background-color: #0A2647;
+            }
+          `}
+        </style>
+        <Container maxWidth="xl" >
+          <MainConferenceBanner conference={conference} />
+          {/* <Header conference={conference}/> */}
+          <Sponsors sponsors={sponsors} />
           <PhysicalGifts gifts={physicalG} />
           <DigitalGifts gifts={digitalG} />
-        </AuthProvider>
+          {/*<ShippingInfo />*/}
 
-        {/*<ShippingInfo />*/}
-
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </AuthProvider>
+    
   );
 };
 
